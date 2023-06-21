@@ -2,6 +2,8 @@
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 //import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -97,8 +99,6 @@ public class StockBuyOB {
             extentTest.log(Status.PASS, textsb+" | Buy | " +stocknamebuyob+" | Price : "+stockpricebuyob+" | Lot "+stocklotbuyob+" --------- PASS | Status : "+text);
             System.out.println("STOCK BUY ORDERBOOKING PASS");
         }
-
-
 
     }
 

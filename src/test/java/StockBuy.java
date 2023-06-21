@@ -2,12 +2,15 @@
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 //import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.markuputils.ExtentColor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+//import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 public class StockBuy {
     public static void Buy(WebDriver driver, ExtentTest extentTest, String stocknamebuy, String stockpricebuy, String stocklotbuy) {
@@ -95,9 +98,6 @@ public class StockBuy {
             extentTest.log(Status.PASS, "Buy : " +stocknamebuy+" | Price : "+stockpricebuy+" | Lot : "+stocklotbuy+" --------- PASS | Status : "+text);
             System.out.println("STOCK BUY PASS");
         }
-
-
-
     }
 
 }

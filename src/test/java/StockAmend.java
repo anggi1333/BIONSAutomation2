@@ -1,9 +1,5 @@
-//import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-//import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -11,8 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class StockWithdrawl {
-    public static void wd(WebDriver driver, ExtentTest extentTest, String stocknamewd, String stockpricewd, String stocklotwd) {
+public class StockAmend {
+    public static void am(WebDriver driver, ExtentTest extentTest, String stocknameam, String stockpriceam, String stocklotam, String stockpriceamto, String stocklotamto) {
         try {
             // Wait for 2 seconds
             Thread.sleep(1000);
@@ -41,7 +37,7 @@ public class StockWithdrawl {
         }
         WebElement stockbuy = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[2]/div[2]/div/div/div[2]/div[1]/input"));
         stockbuy.clear();
-        stockbuy.sendKeys(stocknamewd);
+        stockbuy.sendKeys(stocknameam);
         stockbuy.sendKeys(Keys.ENTER);
         try {
             // Wait for 2 seconds
@@ -53,10 +49,10 @@ public class StockWithdrawl {
 
         WebElement pricebuy = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[3]/div[2]/div[2]/div[1]/input"));
         pricebuy.clear();
-        pricebuy.sendKeys(stockpricewd);
+        pricebuy.sendKeys(stockpriceam);
         WebElement lotbuy = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[4]/div[2]/div[2]/div[1]/input"));
         lotbuy.clear();
-        lotbuy.sendKeys(stocklotwd);
+        lotbuy.sendKeys(stocklotam);
         WebElement buybtn = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[7]/div/div/div"));
         buybtn.click();
         try {
@@ -96,8 +92,8 @@ public class StockWithdrawl {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            WebElement wd = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/div"));
-            wd.click();
+            WebElement amend1 = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/div"));
+            amend1.click();
             try {
                 // Wait for 5 seconds
                 Thread.sleep(5000);
@@ -105,32 +101,54 @@ public class StockWithdrawl {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            WebElement wd2 = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div/div[1]/div/div[4]/div/div[6]/div/div/div"));
-            wd2.click();
-            WebElement okwd = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div"));
-            okwd.click();
+            WebElement pricebuyam = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div/div[1]/div/div[4]/div/div[4]/div[2]/div[2]/div[1]/input"));
+            pricebuyam.clear();
+            pricebuyam.sendKeys(stockpriceamto);
+            WebElement lotbuyam = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div/div[1]/div/div[4]/div/div[5]/div[2]/div[2]/div[1]/input"));
+            lotbuyam.clear();
+            lotbuyam.sendKeys(stocklotamto);
+            WebElement btnam = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div/div[1]/div/div[4]/div/div[7]/div/div/div"));
+            btnam.click();
             try {
-                // Wait for 5 seconds
-                Thread.sleep(5000);
+                // Wait for 2 seconds
+                Thread.sleep(2000);
             } catch (InterruptedException f) {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            WebElement okwd2 = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div/div/div/div"));
-            okwd2.click();
-            WebElement snamewd= driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[1]/div[1]"));
-            String stocknamewdtxt = snamewd.getText();
-            WebElement slotwd = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[2]/div[3]"));
-            String slotwdtxt = slotwd.getText();
-            extentTest.log(Status.PASS, "Withdraw : "+stocknamewdtxt+ " | Total Lot : "+slotwdtxt+" ---------PASS ");
-            System.out.println("STOCK WD PASS"+stocknamewdtxt);
+            WebElement sendthisorderyesam = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/div"));
+            sendthisorderyesam.click();
+            try {
+                // Wait for 3 seconds
+                Thread.sleep(2000);
+            } catch (InterruptedException f) {
+                f.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
+            WebElement ordersendyesam = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/div"));
+            ordersendyesam.click();
+            try {
+                // Wait for 3 seconds
+                Thread.sleep(2000);
+            } catch (InterruptedException f) {
+                f.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
+            WebElement statusamended = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div/div/div[3]/div/div"));
+            String statusamendedtxt = statusamended.getText();
+            WebElement lotamended = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[2]/div[3]"));
+            String lotamendedtxt = lotamended.getText();
+            WebElement priceamended = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[2]/div[2]"));
+            String priceamendedtxt = priceamended.getText();
+
+            extentTest.log(Status.PASS, statusamendedtxt +" "+ stocknameam + " ---------PASS from | Price : Rp "+stockpriceam+ " & Lot : " + stocklotam + " -----to----- " + priceamendedtxt + " & Lot : " + lotamendedtxt + " | With New Status " + text);
+            System.out.println("STOCK AMEND PASS " + statusamendedtxt);
         } else {
-            extentTest.log(Status.FAIL, "Fail Withdraw | Status : " +text+" ---------- REJECTED");
-            System.out.println("STOCK WD FAIL");
+
+            extentTest.log(Status.FAIL, " Amend Fail | Status : " + text);
+            System.out.println("STOCK AMEND FAIL");
         }
-
-
-
     }
+
 
 }

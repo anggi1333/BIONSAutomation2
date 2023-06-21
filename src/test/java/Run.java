@@ -29,11 +29,12 @@ public class Run {
         ExtentTest stockBuyObTest  = extent.createTest("Test Buy Stock OrderBooking", "Description of Test Buy Stock OrderBooking");
         ExtentTest stockSellObTest  = extent.createTest("Test Sell Stock OrderBooking", "Description of Test Sell Stock OrderBooking");
         ExtentTest stockWDTest  = extent.createTest("Test Withdrawl Stock", "Description of Test Withdrawl Stock");
+        ExtentTest stockAmend = extent.createTest("Test Amend","Desription of Test Amend Stock");
 
 
-        Login.testScenariologin(driver, loginTest,"reni666","d","d12345");  //input username , password, pin untuk login
+        Login.testScenariologin(driver, loginTest,"DEV","reni666","d","d12345");  //input username , password, pin untuk login
 
-       //input order buy (stock name, stock price, stock lot buy)
+        //input order buy (stock name, stock price, stock lot buy)
         StockBuy.Buy(driver,stockBuyTest,"BBNI","9750","1");
         StockBuy.Buy(driver,stockBuyTest,"BBNI","9751","1"); //input order buy (stock name, stock price, stock lot buy)
         StockBuy.Buy(driver,stockBuyTest,"BBNI","1","1"); //input order buy (stock name, stock price, stock lot buy)
@@ -54,7 +55,9 @@ public class Run {
         StockWithdrawl.wd(driver,stockWDTest,"ABBA","99","20000"); //input order Sell Orderbooking (stock name, stock price, stock lot buy)
         StockWithdrawl.wd(driver,stockWDTest,"BBNI","15000","1"); //input order Sell Orderbooking (stock name, stock price, stock lot buy)
 
-        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("D://result//dd//Report Test Automate.html");
+        StockAmend.am(driver,stockAmend,"ABBA","99","2000","90","10");
+        StockAmend.am(driver,stockAmend,"ABBA","1","1","90","10");
+        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("D://result//dd//Report Test Automate222.html");
 
         extent.attachReporter(sparkReporter);
         extent.flush();

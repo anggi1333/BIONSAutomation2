@@ -122,7 +122,7 @@ public class StockWithdrawl {
             String stocknamewdtxt = snamewd.getText();
             WebElement slotwd = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[2]/div[3]"));
             String slotwdtxt = slotwd.getText();
-            extentTest.log(Status.PASS, "Withdraw : "+stocknamewdtxt+ " | Total Lot : "+slotwdtxt+" ---------PASS ");
+            extentTest.log(Status.PASS, "Withdraw : "+stocknamewdtxt+  " | Total Lot : "+slotwdtxt+" ---------PASS ");
             System.out.println("STOCK WD PASS"+stocknamewdtxt);
         } else {
             extentTest.log(Status.FAIL, "Fail Withdraw | Status : " +text+" ---------- REJECTED");

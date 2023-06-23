@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.File;
+//import com.example.package.Login
 
 
 public class Run {
@@ -32,31 +33,31 @@ public class Run {
         ExtentTest stockAmend = extent.createTest("Test Amend","Desription of Test Amend Stock");
 
 
-        Login.testScenariologin(driver, loginTest,"DEV","reni666","d","d12345");  //input username , password, pin untuk login
+        Login.testScenariologin(driver, loginTest,"DEV","anggi666","d","d12345");  //input username , password, pin untuk login
 
         //input order buy (stock name, stock price, stock lot buy)
-        StockBuy.Buy(driver,stockBuyTest,"BBNI","9750","1");
-        StockBuy.Buy(driver,stockBuyTest,"BBNI","9751","1"); //input order buy (stock name, stock price, stock lot buy)
+        StockBuy.Buy(driver,stockBuyTest,"BBNI","14025","1");
+        StockBuy.Buy(driver,stockBuyTest,"BBNI","11701","1"); //input order buy (stock name, stock price, stock lot buy)
         StockBuy.Buy(driver,stockBuyTest,"BBNI","1","1"); //input order buy (stock name, stock price, stock lot buy)
-        StockBuy.Buy(driver,stockBuyTest,"BBNI","15000","1"); //input order buy (stock name, stock price, stock lot buy)
-        StockBuy.Buy(driver,stockBuyTest,"BBNI","9750","50001"); //input order buy (stock name, stock price, stock lot buy)
+        StockBuy.Buy(driver,stockBuyTest,"BBNI","20000","1"); //input order buy (stock name, stock price, stock lot buy)
+        StockBuy.Buy(driver,stockBuyTest,"BBNI","14025","50001"); //input order buy (stock name, stock price, stock lot buy)
 
 
-        StockSell.Sell(driver, stockSellTest, "BBNI", "9750", "1"); //input order Sell (stock name, stock price, stock lot buy)
-        StockSell.Sell(driver, stockSellTest, "BBNI", "9751", "1"); //input order Sell (stock name, stock price, stock lot buy)
-        StockSell.Sell(driver, stockSellTest, "BBNI", "1", "1"); //input order Sell (stock name, stock price, stock lot buy)
-        StockSell.Sell(driver, stockSellTest, "BBNI", "15000", "1"); //input order Sell (stock name, stock price, stock lot buy)
-        StockSell.Sell(driver, stockSellTest, "BBNI", "9750", "50001"); //input order Sell (stock name, stock price, stock lot buy)
+        StockSell.Sell(driver, stockSellTest, "BBRI", "6925", "1"); //input order Sell (stock name, stock price, stock lot buy)
+        StockSell.Sell(driver, stockSellTest, "BBRI", "6927", "1"); //input order Sell (stock name, stock price, stock lot buy)
+        StockSell.Sell(driver, stockSellTest, "BBRI", "1", "1"); //input order Sell (stock name, stock price, stock lot buy)
+        StockSell.Sell(driver, stockSellTest, "BBRI", "15000", "1"); //input order Sell (stock name, stock price, stock lot buy)
+        StockSell.Sell(driver, stockSellTest, "BBRI", "6925", "50001"); //input order Sell (stock name, stock price, stock lot buy)
+//
+//        StockBuyOB.BuyOb(driver,stockBuyObTest,"BBCA","14450","3");//input order Buy Orderbooking (stock name, stock price, stock lot buy)
+//
+//        StockSellOB.SellOb(driver,stockSellObTest,"BBNI","9800","3");  //input order Sell Orderbooking (stock name, stock price, stock lot buy)
 
-        StockBuyOB.BuyOb(driver,stockBuyObTest,"BBCA","14450","3");//input order Buy Orderbooking (stock name, stock price, stock lot buy)
+        StockWithdrawl.wd(driver,stockWDTest,"BBNI","14025","20000"); //input order Sell Orderbooking (stock name, stock price, stock lot buy)
+        StockWithdrawl.wd(driver,stockWDTest,"BBRI","6950","1"); //input order Sell Orderbooking (stock name, stock price, stock lot buy)
 
-        StockSellOB.SellOb(driver,stockSellObTest,"BBNI","9800","3");  //input order Sell Orderbooking (stock name, stock price, stock lot buy)
-
-        StockWithdrawl.wd(driver,stockWDTest,"ABBA","99","20000"); //input order Sell Orderbooking (stock name, stock price, stock lot buy)
-        StockWithdrawl.wd(driver,stockWDTest,"BBNI","15000","1"); //input order Sell Orderbooking (stock name, stock price, stock lot buy)
-
-        StockAmend.am(driver,stockAmend,"ABBA","99","2000","90","10");
-        StockAmend.am(driver,stockAmend,"ABBA","1","1","90","10");
+        StockAmend.am(driver,stockAmend,"BBNI","14025","2000","11700","1");
+        StockAmend.am(driver,stockAmend,"BBRI","1","1","90","10");
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter("D://result//dd//Report Test Automate222.html");
 
         extent.attachReporter(sparkReporter);

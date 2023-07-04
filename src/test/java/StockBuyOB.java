@@ -1,103 +1,105 @@
-//import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-//import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class StockBuyOB {
     public static void BuyOb(WebDriver driver, ExtentTest extentTest, String stocknamebuyob, String stockpricebuyob, String stocklotbuyob) {
-        try {
-            // Wait for 2 seconds
-            Thread.sleep(1000);
-        } catch (InterruptedException f) {
-            f.printStackTrace();
-            Thread.currentThread().interrupt();
-        }
-        WebElement menu = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]"));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement menu  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
         menu.click();
         try {
-            // Wait for 2 seconds
+            // Wait for 1 seconds
             Thread.sleep(1000);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement buy = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[4]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div/div/div[21]/div/div/div/div[1]")));
-        buy.click();
-        try {
-            // Wait for 2 seconds
-            Thread.sleep(1000);
-        } catch (InterruptedException f) {
-            f.printStackTrace();
-            Thread.currentThread().interrupt();
-        }
-        WebElement stockbuy = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[2]/div[2]/div/div/div[2]/div[1]/input"));
-        stockbuy.clear();
+        WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[4]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div/div/div[21]/div/div/div/div[1]")));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(buy).click().perform();
+        WebElement stockbuy  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[3]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[2]/div[2]/div/div/div[2]/div[1]/input")));
+        stockbuy.sendKeys(Keys.CONTROL + "a");
+        stockbuy.sendKeys(Keys.BACK_SPACE);
         stockbuy.sendKeys(stocknamebuyob);
         stockbuy.sendKeys(Keys.ENTER);
         try {
-            // Wait for 2 seconds
-            Thread.sleep(3000);
+            // Wait for 1 seconds
+            Thread.sleep(1000);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-
-        WebElement pricebuy = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[3]/div[2]/div[2]/div[1]/input"));
-        pricebuy.clear();
+        WebElement pricebuy  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[3]/div[2]/div[2]/div[1]/input")));
+        pricebuy.sendKeys(Keys.CONTROL + "a");
+        pricebuy.sendKeys(Keys.BACK_SPACE);
         pricebuy.sendKeys(stockpricebuyob);
-        WebElement lotbuy = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[4]/div[2]/div[2]/div[1]/input"));
-        lotbuy.clear();
+        try {
+            // Wait for 1 seconds
+            Thread.sleep(1000);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
+        WebElement lotbuy  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[4]/div[2]/div[2]/div[1]/input")));
+        lotbuy.sendKeys(Keys.CONTROL + "a");
+        lotbuy.sendKeys(Keys.BACK_SPACE);
         lotbuy.sendKeys(stocklotbuyob);
-        WebElement checkob = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[6]/div/div[1]/div/div[2]/div"));
+        try {
+            // Wait for 1 seconds
+            Thread.sleep(1000);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
+        WebElement checkob  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[6]/div/div[1]/div/div[2]/div")));
         checkob.click();
-        WebElement buybtn = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[7]/div/div/div"));
+        WebElement buybtn  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[7]/div/div/div")));
         buybtn.click();
-        try {
-            // Wait for 2 seconds
-            Thread.sleep(3000);
-        } catch (InterruptedException f) {
-            f.printStackTrace();
-            Thread.currentThread().interrupt();
-        }
-        WebElement sendthisorderyes = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/div"));
+        WebElement sendthisorderyes  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/div")));
         sendthisorderyes.click();
-        try {
-            // Wait for 3 seconds
-            Thread.sleep(3000);
-        } catch (InterruptedException f) {
-            f.printStackTrace();
-            Thread.currentThread().interrupt();
-        }
-        WebElement ordersendyes = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/div"));
+        WebElement ordersendyes  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/div")));
         ordersendyes.click();
         try {
-            // Wait for 5 seconds
-            Thread.sleep(5000);
+            // Wait for 1 seconds
+            Thread.sleep(1000);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement statusElement = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[3]/div[1]/div"));
+        WebElement statusElement  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[3]/div[1]/div")));
         String text = statusElement.getText();
-        WebElement statusob = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[2]/div[4]"));
+        WebElement statusob  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[2]/div[4]")));
         String textsb = statusob.getText();
+        WebElement stocklot = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]")));
+        String stocklottxt = stocklot.getText();
         if (text.contains("REJECTED")) {
-            WebElement rejects = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[3]/div[2]"));
+            try {
+                // Wait for 2 seconds
+                Thread.sleep(2000);
+            } catch (InterruptedException f) {
+                f.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
+            WebElement rejects  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[3]/div[2]")));
             String rejectstatus = rejects.getText();
-            extentTest.log(Status.FAIL, textsb+" | Buy : " +stocknamebuyob+" | Price : "+stockpricebuyob+" | Lot : "+stocklotbuyob+" ---------- "+text+" "+rejectstatus);
-            System.out.println("STOCK BUY ORDERBOOKING FAIL");
+            extentTest.log(Status.FAIL, textsb+" | Buy : " +stocknamebuyob+" | Price : "+stockpricebuyob+" | Lot : "+stocklottxt+" ---------- "+text+" "+rejectstatus);
+            System.out.println("STOCK BUY ORDERBOOKING FAIL "+stocknamebuyob+" | Price : "+stockpricebuyob+" | Lot : "+stocklottxt+" ---------- "+text+" "+rejectstatus);
         } else {
-            extentTest.log(Status.PASS, textsb+" | Buy | " +stocknamebuyob+" | Price : "+stockpricebuyob+" | Lot "+stocklotbuyob+" --------- PASS | Status : "+text);
-            System.out.println("STOCK BUY ORDERBOOKING PASS");
+            try {
+                // Wait for 2 seconds
+                Thread.sleep(2000);
+            } catch (InterruptedException f) {
+                f.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
+            extentTest.log(Status.PASS, textsb+" | Buy | " +stocknamebuyob+" | Price : "+stockpricebuyob+" | Lot "+stocklottxt+" --------- PASS | Status : "+text);
+            System.out.println("STOCK BUY ORDERBOOKING PASS "+stocknamebuyob+" | Price : "+stockpricebuyob+" | Lot "+stocklottxt+" --------- PASS | Status : "+text);
         }
 
     }

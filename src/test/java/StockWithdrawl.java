@@ -20,11 +20,18 @@ public class StockWithdrawl {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[4]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div/div/div[21]/div/div/div/div[1]")));
+        WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Buy']")));
         Actions actions = new Actions(driver);
         actions.moveToElement(buy).click().perform();
-        WebElement stockbuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[2]/div[2]/div/div/div[2]/div[1]/input")));
+        WebElement stockbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
         stockbuy.sendKeys(Keys.CONTROL + "a");
+        try {
+            // Wait for 0.5 seconds
+            Thread.sleep(500);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
         stockbuy.sendKeys(Keys.BACK_SPACE);
         stockbuy.sendKeys(stocknamewd);
         stockbuy.sendKeys(Keys.ENTER);
@@ -35,33 +42,33 @@ public class StockWithdrawl {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement pricebuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[3]/div[2]/div[2]/div[1]/input")));
+        WebElement pricebuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div[2]/div/input")));
         pricebuy.sendKeys(Keys.CONTROL + "a");
+        try {
+            // Wait for 0.5 seconds
+            Thread.sleep(500);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
         pricebuy.sendKeys(Keys.BACK_SPACE);
         pricebuy.sendKeys(stockpricewd);
+        WebElement lotbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div[2]/div/input")));
+        lotbuy.sendKeys(Keys.CONTROL + "a");
         try {
-            // Wait for 1 seconds
-            Thread.sleep(1000);
+            // Wait for 0.5 seconds
+            Thread.sleep(500);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement lotbuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[4]/div[2]/div[2]/div[1]/input")));
-        lotbuy.sendKeys(Keys.CONTROL + "a");
         lotbuy.sendKeys(Keys.BACK_SPACE);
         lotbuy.sendKeys(stocklotwd);
-        try {
-            // Wait for 1 seconds
-            Thread.sleep(1000);
-        } catch (InterruptedException f) {
-            f.printStackTrace();
-            Thread.currentThread().interrupt();
-        }
-        WebElement buybtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[4]/div[7]/div/div/div")));
+        WebElement buybtn= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'BUY') and contains(@style, 'text-align: center')]")));
         buybtn.click();
-        WebElement sendthisorderyes = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/div")));
+        WebElement sendthisorderyes= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
         sendthisorderyes.click();
-        WebElement ordersendyes = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div/div")));
+        WebElement ordersendyes= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
         ordersendyes.click();
         try {
             // Wait for 1 seconds
@@ -70,33 +77,33 @@ public class StockWithdrawl {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement statusElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[3]/div[1]/div")));
+        WebElement statusElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderstatus-0']")));
         String text = statusElement.getText();
 
         if (text.contains("OPEN") || text.contains("PARTIAL")) {
             try {
                 // Wait for 1 seconds
-                Thread.sleep(1000);
+                Thread.sleep(3000);
             } catch (InterruptedException f) {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
             statusElement.click();
-            WebElement wd = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/div")));
+            WebElement wd = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Withdraw']")));
             wd.click();
-            WebElement wd2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div/div[1]/div/div[4]/div/div[6]/div/div/div")));
+            WebElement wd2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Withdraw']")));
             wd2.click();
-            WebElement okwd = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div")));
+            WebElement okwd = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
             okwd.click();
-            WebElement okwd2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[3]/div/div/div[2]/div/div[2]/div/div/div/div")));
+            WebElement okwd2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
             okwd2.click();
-            WebElement snamewd= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[1]/div[1]")));
+            WebElement snamewd= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderstatus-0']")));
             String stocknamewdtxt = snamewd.getText();
-            WebElement slotwd = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div[2]/div[3]")));
+            WebElement slotwd = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderlot-0']")));
             String slotwdtxt = slotwd.getText();
             try {
                 // Wait for 2 seconds
-                Thread.sleep(2000);
+                Thread.sleep(5000);
             } catch (InterruptedException f) {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
@@ -106,7 +113,7 @@ public class StockWithdrawl {
         } else {
             try {
                 // Wait for 2 seconds
-                Thread.sleep(2000);
+                Thread.sleep(5000);
             } catch (InterruptedException f) {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();

@@ -1,19 +1,15 @@
 import com.aventstack.extentreports.ExtentTest;
-//import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.*;
-//import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-//import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
-//import java.util.List;
 
-public class AutoBookingByPrice {
-    public static void testbyprice (WebDriver driver, ExtentTest extentTest, String Stock, String LastBidOffer, String operator, String bookprice, String buyorsell
-            , String price, String lot) {
+public class AutoBookingByTrailingStop {
+    public static void testts(WebDriver driver,ExtentTest extentTest,String stock, String triggerprice, String parameter, String value, String pricetype, String lot) {
+
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement menu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
         menu.click();
@@ -42,8 +38,7 @@ public class AutoBookingByPrice {
                 jgnmuncul.click();
             }
         }
-
-        WebElement stockinp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@data-testid='text-input-outlined' and @value='BBNI']")));
+        WebElement stockinp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@value='BBNI']")));
         stockinp.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds
@@ -53,38 +48,11 @@ public class AutoBookingByPrice {
             Thread.currentThread().interrupt();
         }
         stockinp.sendKeys(Keys.BACK_SPACE);
-        stockinp.sendKeys(Stock);
+        stockinp.sendKeys(stock);
         stockinp.sendKeys(Keys.ENTER);
-        if (LastBidOffer.equals("BID")) {
-            WebElement lbowd = driver.findElement(By.xpath("//*[text()='If the following conditions match:']/following-sibling::*[4]/div[1]"));
-            lbowd.click();
 
-            WebElement bid = driver.findElement(By.xpath("//*[text()='Bid Price']"));
-            Actions actionsbid = new Actions(driver);
-            actionsbid.moveToElement(bid).click().perform();
-        } else if (LastBidOffer.equals("OFFER")) {
-            WebElement lbowd = driver.findElement(By.xpath("//*[text()='If the following conditions match:']/following-sibling::*[4]/div[1]"));
-            lbowd.click();
-            WebElement offer = driver.findElement(By.xpath("//*[text()='Offer Price']"));
-            Actions actionsoffer = new Actions(driver);
-            actionsoffer.moveToElement(offer).click().perform();
-        }
-        if (operator.equals("KS")) {
-            WebElement opt = driver.findElement(By.xpath("//*[text()='If the following conditions match:']/following-sibling::*[4]/div[2]"));
-            opt.click();
-            WebElement opt2 = driver.findElement(By.xpath("//*[text()='<=']"));
-            Actions actionsopt3 = new Actions(driver);
-            actionsopt3.moveToElement(opt2).click().perform();
-
-        } else if (operator.equals("LS")) {
-            WebElement opt = driver.findElement(By.xpath("//*[text()='If the following conditions match:']/following-sibling::*[4]/div[2]"));
-            opt.click();
-            WebElement opt3 = driver.findElement(By.xpath("//*[text()='>=']"));
-            Actions actionsopt3 = new Actions(driver);
-            actionsopt3.moveToElement(opt3).click().perform();
-        }
-        WebElement book = driver.findElement(By.xpath("//*[text()='If the following conditions match:']/following-sibling::*[4]/div[3]/div/div[2]/div/input"));
-        book.sendKeys(Keys.CONTROL + "a");
+        WebElement codition = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Condition']/following-sibling::*/div")));
+        codition.click();
         try {
             // Wait for 0.5 seconds
             Thread.sleep(500);
@@ -92,25 +60,27 @@ public class AutoBookingByPrice {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        book.sendKeys(Keys.BACK_SPACE);
-        book.sendKeys(bookprice);
+        WebElement ts = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Booking By Trailing Stop']")));
+        Actions tsa = new Actions(driver);
+        tsa.moveToElement(ts).click().perform();
+        WebElement tgrprice = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Trigger Price']/following-sibling::*[1]/div/div/input")));
+        tgrprice.sendKeys(triggerprice);
+        if (parameter.equals("PERSEN")){
+            WebElement prm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Parameter']/following-sibling::*[1]/div")));
+            prm.click();
+            WebElement persen = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@role= 'menuitem']/div/div/div[text()='%']")));
+            Actions persena = new Actions(driver);
+            persena.moveToElement(persen).click().perform();
 
-        if (buyorsell.equals("BUY")) {
-            WebElement buy1 = driver.findElement(By.xpath("//*[text()='If the following conditions match:']/following-sibling::*[5]/div[2]"));
-            buy1.click();
-            WebElement buy2 = driver.findElement(By.xpath("//div[@role= 'menuitem']/div/div/div[text()='Buy']"));
-            Actions actionsbuy2 = new Actions(driver);
-            actionsbuy2.moveToElement(buy2).click().perform();
-        }else{
-            WebElement sell1 = driver.findElement(By.xpath("//*[text()='If the following conditions match:']/following-sibling::*[5]/div[2]"));
-            sell1.click();
-            WebElement sell2 = driver.findElement(By.xpath("//div[@role= 'menuitem']/div/div/div[text()='Sell']"));
-            Actions actionssell2 = new Actions(driver);
-            actionssell2.moveToElement(sell2).click().perform();
+        } else if (parameter.equals("TICK")) {
+            WebElement prm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Parameter']/following-sibling::*[1]/div")));
+            prm.click();
+            WebElement persen = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@role= 'menuitem']/div/div/div[text()='tick']")));
+            Actions persena = new Actions(driver);
+            persena.moveToElement(persen).click().perform();
         }
-
-        WebElement pricebook = driver.findElement(By.xpath("//*[text()='If the following conditions match:']/following-sibling::*[6]/div[2]/div/div[2]/div/input"));
-        pricebook.sendKeys(Keys.CONTROL + "a");
+        WebElement values = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Value']/following-sibling::*/div/div/input")));
+        values.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds
             Thread.sleep(500);
@@ -118,10 +88,59 @@ public class AutoBookingByPrice {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        pricebook.sendKeys(Keys.BACK_SPACE);
-        pricebook.sendKeys(price);
-        WebElement lotbook = driver.findElement(By.xpath("//*[text()='If the following conditions match:']/following-sibling::*[6]/div[3]/div/div[2]/div/input"));
-        lotbook.sendKeys(Keys.CONTROL + "a");
+        values.sendKeys(Keys.BACK_SPACE);
+        values.sendKeys(value);
+        values.sendKeys(Keys.ENTER);
+        switch (pricetype) {
+            case "BID" -> {
+                WebElement pricetypee = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price Type']/following-sibling::*/div/div/div/div")));
+                Actions pricetypeea = new Actions(driver);
+                pricetypeea.moveToElement(pricetypee).click().perform();
+                try {
+                    // Wait for 5 seconds
+                    Thread.sleep(1000);
+                } catch (InterruptedException f) {
+                    f.printStackTrace();
+                    Thread.currentThread().interrupt();
+                }
+                WebElement bid = driver.findElement(By.xpath("//*[text()='Bid Price']"));
+                Actions actionsbid = new Actions(driver);
+                actionsbid.moveToElement(bid).click().perform();
+            }
+            case "LAST" -> {
+                WebElement pricetypee = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price Type']/following-sibling::*/div/div/div/div")));
+                Actions pricetypeea = new Actions(driver);
+                pricetypeea.moveToElement(pricetypee).click().perform();
+                try {
+                    // Wait for 5 seconds
+                    Thread.sleep(1000);
+                } catch (InterruptedException f) {
+                    f.printStackTrace();
+                    Thread.currentThread().interrupt();
+                }
+                WebElement bid = driver.findElement(By.xpath("//*[text()='Last Price']"));
+                Actions actionsbid = new Actions(driver);
+                actionsbid.moveToElement(bid).click().perform();
+            }
+            case "OFFER" -> {
+                WebElement pricetypee = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price Type']/following-sibling::*/div/div/div/div")));
+                Actions pricetypeea = new Actions(driver);
+                pricetypeea.moveToElement(pricetypee).click().perform();
+                try {
+                    // Wait for 5 seconds
+                    Thread.sleep(1000);
+                } catch (InterruptedException f) {
+                    f.printStackTrace();
+                    Thread.currentThread().interrupt();
+                }
+                WebElement bid = driver.findElement(By.xpath("//*[text()='Offer Price']"));
+                Actions actionsbid = new Actions(driver);
+                actionsbid.moveToElement(bid).click().perform();
+            }
+        }
+
+        WebElement llot = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div/div/input")));
+        llot.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds
             Thread.sleep(500);
@@ -129,20 +148,19 @@ public class AutoBookingByPrice {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        lotbook.sendKeys(Keys.BACK_SPACE);
-        lotbook.sendKeys(lot);
+        llot.sendKeys(Keys.BACK_SPACE);
+        llot.sendKeys(lot);
+        llot.sendKeys(Keys.ENTER);
         WebElement sendasorder= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Send As Order']")));
         sendasorder.click();
-
-
         List<WebElement> errorElements = driver.findElements(By.xpath("//*[text()='Error']"));
         if (!errorElements.isEmpty()) {
             WebElement error = errorElements.get(0);
             String txterror = error.getText();
             WebElement failElements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Error'][1]/following-sibling::*[1]")));
             String txtfail = failElements.getText();
-            extentTest.log(Status.FAIL,txterror +" "+txtfail+" With Stock : "+Stock);
-            System.out.println(txterror +" " +txtfail +" With Stock : "+Stock);
+            extentTest.log(Status.FAIL,txterror +" "+txtfail+" With Stock : "+stock);
+            System.out.println(txterror +" " +txtfail +" With Stock : "+stock);
             try {
                 // Wait for 1 seconds
                 Thread.sleep(1000);
@@ -161,7 +179,7 @@ public class AutoBookingByPrice {
         ordersendyes.click();
         try {
             // Wait for 1 seconds
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
@@ -183,14 +201,9 @@ public class AutoBookingByPrice {
         String textstatusord = statusord.getText();
         WebElement statusord2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='algonotes-0']")));
         String textoder = statusord2.getText();
-        try {
-            // Wait for 2 seconds
-            Thread.sleep(5000);
-        } catch (InterruptedException f) {
-            f.printStackTrace();
-            Thread.currentThread().interrupt();
-        }
-        extentTest.log(Status.PASS,"STATUS ORDER LIST : "+textstatusord+ " || "+textoder);
-        System.out.println("Auto Booking By Price " +textstatusord+ " || "+textoder);
+
+        extentTest.log(Status.PASS,  "STATUS ORDER LIST : "+textstatusord+ " || "+textoder);
+        System.out.println("Auto Booking By TIME " +textstatusord+ " || "+textoder);
+
     }
 }

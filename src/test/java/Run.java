@@ -1,10 +1,12 @@
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 
@@ -17,7 +19,7 @@ public class Run {
         ChromeDriverService service = new ChromeDriverService.Builder()
                 .withLogFile(new File("D://log.txt"))
                 .build();
-        WebDriver driver = new ChromeDriver(service, options);
+        RemoteWebDriver driver = new ChromeDriver(service, options);
         driver.get("https://appdev.bions.id/login");
         driver.manage().window().maximize();
 
@@ -35,35 +37,61 @@ public class Run {
         ExtentTest BookingByPriceTest = extent.createTest("Test Booking By PriceTest","Desription Auto Booking By Price");
         ExtentTest BookingByGainLoss = extent.createTest("Test Booking By GainLoss","Desription Auto Booking By Gain Loss");
         ExtentTest BookingByTime = extent.createTest("Test Booking By Time","Desription Auto Booking By Time");
+        ExtentTest BookingByTrailingStop = extent.createTest("Test Booking By Trailing Stop","Desription Auto Booking By Trailing Stop");
+        try {
+            // Wait for 1 seconds
+            Thread.sleep(4000);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
+        WebElement versi = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[4]/div[4]/div/div"));
+        String version = versi.getText();
+        String chromeVersion = driver.getCapabilities().getVersion();
+        System.out.println("BIONS WEB "+version+" And CHROME Version "+chromeVersion);
 
-        Login.testScenariologin(driver, loginTest,"DEV","anggi666","d","d12345");  //input username , password, pin untuk login
+        Login.testScenariologin(driver, loginTest, "DEV", "autoreg", "d", "d12345");
+//        "AUTOREG",
+            System.out.println("---------------");
+            System.out.println("SEKENARIO BUY");
+            StockBuy.Buy(driver, stockBuyTest, "RG", "abba", "85", "1");
+            StockBuy.Buy(driver, stockBuyTest, "RG", "abba", "10000", "1");
+            System.out.println("---------------");
+            System.out.println("SEKENARIO SELL");
+            StockSell.Sell(driver, stockSellTest, "abba", "85", "1");
+            StockSell.Sell(driver, stockSellTest, "aspi", "85", "1");
+            System.out.println("---------------");
+            System.out.println("SEKENARIO WITHDRAW");
+            StockWithdrawl.wd(driver, stockWDTest, "ABBA", "85", "1");
+            StockWithdrawl.wd(driver, stockWDTest, "aspi", "85", "1");
+            System.out.println("---------------");
+            System.out.println("SEKENARIO AMEND");
+            StockAmend.am(driver, stockAmend, "ABBA", "85", "1", "86", "1");
+            StockAmend.am(driver, stockAmend, "aspi", "85", "1", "86", "1");
+            System.out.println("---------------");
+            System.out.println("SEKENARIO BUY ORDERBOOKING");
+            StockBuyOB.BuyOb(driver, stockBuyObTest, "ABBA", "76", "1");
+            System.out.println("---------------");
+            System.out.println("SEKENARIO SELL ORDERBOOKING");
+            StockSellOB.SellOb(driver, stockSellObTest, "ABBA", "76", "1");
+            System.out.println("---------------");
+            System.out.println("SEKENARIO AUTO BOOKING BY PRICE");
+            AutoBookingByPrice.testbyprice(driver, BookingByPriceTest, "ABBA", "LAST", "LS", "70", "BUY", "76", "1");
+            AutoBookingByPrice.testbyprice(driver, BookingByPriceTest, "AVIA", "LAST", "LS", "70", "SELL", "76", "1");
+            System.out.println("---------------");
+            System.out.println("SEKENARIO AUTO BOOKING BY GAIN/LOSS");
+            AutoBookingByGainLoss.testgl(driver, BookingByGainLoss, "ABBA", "GAIN", "KS", "1", "SELL", "76", "2");
+            AutoBookingByGainLoss.testgl(driver, BookingByGainLoss, "FISK", "GAIN", "KS", "1", "SELL", "76", "2");
+            System.out.println("---------------");
+            System.out.println("SEKENARIO AUTO BOOKING BY TIME");
+            AutoBookingByTime.testbt(driver, BookingByTime, "ABBA", "CUSTOM", "12", "ENTRY", "BUY", "1", "10");
+            AutoBookingByTime.testbt(driver, BookingByTime, "AVIA", "CUSTOM", "12", "ENTRY", "SELL", "1", "10");
+            System.out.println("---------------");
+            System.out.println("SEKENARIO AUTO BOOKING BY TRAILING STOP");
+            AutoBookingByTrailingStop.testts(driver, BookingByTrailingStop, "ABBA", "100", "TICK", "1", "OFFER", "1");
+            AutoBookingByTrailingStop.testts(driver, BookingByTrailingStop, "ABBA", "1", "TICK", "1", "OFFER", "1000000");
 
-        StockBuy.Buy(driver,stockBuyTest,"TN","BBRI","5650","1111111111");//input order buy (stock name, stock price, stock lot buy)
-        StockBuy.Buy(driver,stockBuyTest,"RG","BBRI","5650","1");//input order buy (stock name, stock price, stock lot buy)
-
-        StockSell.Sell(driver, stockSellTest, "BBRI", "5650", "1"); //input order Sell (stock name, stock price, stock lot buy)
-        StockSell.Sell(driver, stockSellTest, "BBRI", "5651", "1"); //input order Sell (stock name, stock price, stock lot buy)
-
-        StockWithdrawl.wd(driver,stockWDTest,"ABBA","87","1");
-        StockWithdrawl.wd(driver,stockWDTest,"ABBA","87","1");
-
-        StockAmend.am(driver,stockAmend,"ABBA","87","1","89","1");
-        StockAmend.am(driver,stockAmend,"ABBA","87","1","89","1");
-
-        AutoBookingByPrice.testbyprice(driver,BookingByPriceTest,"ASDM","LAST","SD","5800","SELL","5500","1");
-        AutoBookingByPrice.testbyprice(driver,BookingByPriceTest,"ACST","BID","KS","5800","BUY","5500","2");
-
-        AutoBookingByGainLoss.testgl(driver,BookingByGainLoss,"ASDM","LOSS","LS","1","SELL","5500","1");
-        AutoBookingByGainLoss.testgl(driver,BookingByGainLoss,"BBRI","GAIN","KS","1","BUY","5500","2");
-
-        StockBuyOB.BuyOb(driver,stockBuyObTest,"ASDM","5600","3");
-
-        StockSellOB.SellOb(driver,stockSellObTest,"ASDM","5800","3");
-
-        AutoBookingByTime.testbt(driver,BookingByTime,"ASDM","CUSTOM","10","ENTRY","SELL");
-        AutoBookingByTime.testbt(driver,BookingByTime,"BBNI","CUSTOM","11","BEST","BUY");
-
-        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("D://result//dd//Report Test Automate222.html");
+        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("D://result//dd//ajggg.html");
 
         extent.attachReporter(sparkReporter);
         extent.flush();

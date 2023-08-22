@@ -3,24 +3,22 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.File;
 
 public class Run {
 
     public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "C:\\Chromedriver\\chromedrivergg.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        ChromeDriverService service = new ChromeDriverService.Builder()
-                .withLogFile(new File("D://log.txt"))
-                .build();
-        RemoteWebDriver driver = new ChromeDriver(service, options);
-        driver.get("https://appdev.bions.id/login");
+        System.setProperty("webdriver.edge.driver", "D:\\MicrosoftWebDriver.exe");
+
+        EdgeOptions options = new EdgeOptions();
+        RemoteWebDriver driver = new EdgeDriver(options);
+
+
+        driver.get("https://appdev.bions.id/");
         driver.manage().window().maximize();
 
 
@@ -38,6 +36,7 @@ public class Run {
         ExtentTest BookingByGainLoss = extent.createTest("Test Booking By GainLoss","Desription Auto Booking By Gain Loss");
         ExtentTest BookingByTime = extent.createTest("Test Booking By Time","Desription Auto Booking By Time");
         ExtentTest BookingByTrailingStop = extent.createTest("Test Booking By Trailing Stop","Desription Auto Booking By Trailing Stop");
+        ExtentTest BookingByBottomRebound = extent.createTest("Test Booking By Bottom Rebound","Desription Auto Booking By Bottom Rebound");
         try {
             // Wait for 1 seconds
             Thread.sleep(4000);
@@ -47,10 +46,10 @@ public class Run {
         }
         WebElement versi = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[4]/div[4]/div/div"));
         String version = versi.getText();
-        String chromeVersion = driver.getCapabilities().getVersion();
-        System.out.println("BIONS WEB "+version+" And CHROME Version "+chromeVersion);
+        String edgeVersion = driver.getCapabilities().getCapability(CapabilityType.BROWSER_VERSION).toString();
+        System.out.println("BIONS WEB "+version+" And Edge Version "+edgeVersion);
 
-        Login.testScenariologin(driver, loginTest, "DEV", "autoreg", "d", "d12345");
+        Login.testScenariologin(driver, loginTest, "DEV", "AUTOREG", "d", "d12345");
 //        "AUTOREG",
             System.out.println("---------------");
             System.out.println("SEKENARIO BUY");
@@ -90,11 +89,17 @@ public class Run {
             System.out.println("SEKENARIO AUTO BOOKING BY TRAILING STOP");
             AutoBookingByTrailingStop.testts(driver, BookingByTrailingStop, "ABBA", "100", "TICK", "1", "OFFER", "1");
             AutoBookingByTrailingStop.testts(driver, BookingByTrailingStop, "ABBA", "1", "TICK", "1", "OFFER", "1000000");
+            System.out.println("SEKENARIO AUTO BOOKING BY BOTTOM REBOUND");
+            System.out.println("---------------");
+            AutoBookingByBottomRebound.testbr(driver, BookingByBottomRebound, "ABBA", "80", "TICK", "1", "OFFER", "1");
+            AutoBookingByBottomRebound.testbr(driver, BookingByBottomRebound, "ABBA", "99", "TICK", "1", "OFFER", "1000000");
 
-        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("D://result//dd//ajggg.html");
+        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("D://result//dd//abba.html");
 
         extent.attachReporter(sparkReporter);
         extent.flush();
         driver.quit();
+
     }
 }
+

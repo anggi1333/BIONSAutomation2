@@ -118,8 +118,8 @@ public class StockWithdrawl {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            extentTest.log(Status.FAIL, "Fail Withdraw | Status : " +text+" ---------- REJECTED");
-            System.out.println("STOCK WD FAIL | Status : " +text+" ---------- REJECTED");
+            extentTest.log(Status.FAIL, "Fail Withdraw | Status : " +text+" ---------- CANNOT WITHDRAW");
+            System.out.println("STOCK WD FAIL | Status : " +text+" ---------- CANNOT WITHDRAW");
         }
 
 

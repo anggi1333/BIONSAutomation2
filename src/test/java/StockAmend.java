@@ -152,8 +152,8 @@ public class StockAmend {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            extentTest.log(Status.FAIL, " Amend Fail | Status : " + text);
-            System.out.println("STOCK AMEND FAIL| Status : " + text);
+            extentTest.log(Status.FAIL, " Amend Fail | Status : " + text+"---------- CANNOT AMEND");
+            System.out.println("STOCK AMEND FAIL| Status : " + text+"---------- CANNOT AMEND");
         }
     }
 

@@ -3,10 +3,7 @@ import com.aventstack.extentreports.Status;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-//import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.ArrayList;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,7 +12,19 @@ import java.util.List;
 public class StockBuy {
     public static void Buy(WebDriver driver, ExtentTest extentTest, String TNorRG, String stocknamebuy, String  stockpricebuy, String stocklotbuy) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement portp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[2]")));
+        portp.click();
+        try {
+            // Wait for 1 seconds
+            Thread.sleep(4000);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
+        WebElement asset = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[2]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div[1]/div[1]/div[3]/div/div[3]/div[2]")));
+        String asset1 = asset.getText();
         WebElement menu= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
+        menu.click();
         menu.click();
         try {
             // Wait for 1 seconds
@@ -27,30 +36,21 @@ public class StockBuy {
         WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[4]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div/div/div[21]/div/div/div/div[2]")));
         Actions actions = new Actions(driver);
         actions.moveToElement(buy).click().perform();
-
-        // String input
         String input = "ACES,ADRO,AKRA,AMRT,ANTM,ARTO,ASII,BBCA,BBNI,BBRI,BBTN,BMRI,BRIS,BRPT,BUKA,CPIN,EMTK,ESSA,EXCL,GGRM,GOTO,HRUM,ICBP,INCO,INDF,INKP,INTP,ITMG,KLBF,MAPI,MBMA,MDKA,MEDC,MTEL,PGAS,PGEO,PTBA,PTMP,SIDO,SMGR,SRTG,TLKM,TOWR,UNTR,UNVR";
-
-        // Memisahkan string input menjadi array kata-kata
         String[] words = input.split(",");
-
-        // Mengacak array kata-kata
         List<String> wordList = Arrays.asList(words);
         Collections.shuffle(wordList);
-
-        // Mengambil tiga kata pertama setelah pengacakan dan tiga huruf pertama dari setiap kata
         StringBuilder selectedLetters = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             String word = wordList.get(i);
-            selectedLetters.append(word.substring(0, Math.min(word.length(), 4))); // Mengambil 3 huruf pertama dari kata
+            selectedLetters.append(word, 0, Math.min(word.length(), 4));
         }
-
-        // Mengambil tiga huruf pertama dari string yang dihasilkan
         String finalOutput = selectedLetters.substring(0, Math.min(selectedLetters.length(), 4));
 
 
         WebElement stockbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
         stockbuy.sendKeys(Keys.CONTROL + "a");
+
         try {
             // Wait for 0.5 seconds
             Thread.sleep(500);
@@ -88,6 +88,8 @@ public class StockBuy {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
+        WebElement value = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Value']/following-sibling::*")));
+        String valuetxt = value.getText();
         By priceXpath = By.xpath("//*[text()='High']/following-sibling::*");
         By arrowButtonAXpath = By.xpath("//*[text()='Main Board']/parent::*/following-sibling::*");
         By arrowButtonBXpath = By.xpath("//*[text()='Watch List Board']/parent::*/following-sibling::*");
@@ -248,7 +250,26 @@ public class StockBuy {
         ordersendyes.click();
         try {
             // Wait for 1 seconds
-            Thread.sleep(1000);
+            Thread.sleep(3000);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
+        portp.click();
+        try {
+            // Wait for 2 seconds
+            Thread.sleep(2000);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
+
+        String asset2 = asset.getText();
+        WebElement order = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[3]")));
+        order.click();
+        try {
+            // Wait for 1 seconds
+            Thread.sleep(3000);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
@@ -272,12 +293,10 @@ public class StockBuy {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            if (TNorRG.equals("TN")) {
-                extentTest.log(Status.FAIL, "Buy : " + stocknameresulttxt  +" | Price : "+stockpricebuy + " "+orderpricetxt + " | Lot : " + stocklottxt + " ---------- " + text + " " + rejectstatus);
-            }else{
-                extentTest.log(Status.FAIL, "Buy : " + stocknameresulttxt +" | Price : " +stockpricebuy+ " "+orderpricetxt + " | Lot : " + stocklottxt + " ---------- " + text + " " + rejectstatus);
-            }
-            System.out.println("STOCK BUY FAIL "+ stocknameresulttxt +" | Price : "+stockpricebuy+" "+orderpricetxt + " | Lot : " + stocklottxt + " ---------- " + text + " " + rejectstatus);
+
+            extentTest.log(Status.FAIL, "Buy :" + stocknameresulttxt  +" | Price : "+stockpricebuy + " "+orderpricetxt + " | Lot : " + stocklottxt +"|  Value :"+valuetxt + " ---------- " + text + " " + rejectstatus+"------ LIMIT Before :"+asset1+" LIMIT After :"+asset2);
+
+            System.out.println("STOCK BUY FAIL "+ stocknameresulttxt +" | Price : "+stockpricebuy+" "+orderpricetxt + " | Lot : " + stocklottxt+" | Value :"+valuetxt  + " ---------- " + text + " " + rejectstatus+"------ LIMIT Before :"+asset1+" LIMIT After :"+asset2);
 
         } else {
             try {
@@ -287,15 +306,11 @@ public class StockBuy {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            if (TNorRG.equals("TN")) {
-                extentTest.log(Status.PASS, "Buy : " + stocknameresulttxt +" | Price : "+stockpricebuy + " "+orderpricetxt + " | Lot : " + stocklottxt + " --------- PASS | Status : " + text);
-                System.out.println("STOCK BUY PASS "+ stocknameresulttxt + " | Price : "+stockpricebuy +" "+ orderpricetxt + " | Lot : " + stocklottxt + " --------- PASS | Status : " + text);
-            }else {
-                extentTest.log(Status.PASS, "Buy : " + stocknameresulttxt + " | Price : "+stockpricebuy +" "+ orderpricetxt + " | Lot : " + stocklottxt + " --------- PASS | Status : " + text);
-                System.out.println("STOCK BUY PASS "+ stocknameresulttxt + " | Price : "+stockpricebuy + orderpricetxt + " | Lot : " + stocklottxt + " --------- PASS | Status : " + text);
+               extentTest.log(Status.PASS, "Buy : " + stocknameresulttxt +" | Price : "+stockpricebuy + " "+orderpricetxt + " | Lot : " + stocklottxt +" | Value :"+valuetxt+" --------- PASS | Status : " + text +"------ LIMIT Before :"+asset1+"LIMIT Before :"+asset2);
+                System.out.println("STOCK BUY PASS "+ stocknameresulttxt + " | Price : "+stockpricebuy +" "+ orderpricetxt + " | Lot : " + stocklottxt+" | Value :"+valuetxt + " --------- PASS | Status : " + text+"------ LIMIT Before :"+asset1+" LIMIT After :"+asset2);
+               System.out.println("STOCK BUY PASS "+ stocknameresulttxt + " | Price : "+stockpricebuy + orderpricetxt + " | Lot : " + stocklottxt+" | Value :"+valuetxt  + " --------- PASS | Status : " + text+"------ LIMIT Before :"+asset1+" LIMIT After :"+asset2);
             }
 
         }
     }
 
-}

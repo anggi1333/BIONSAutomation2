@@ -39,6 +39,7 @@ public class Run {
         }
         WebElement versi = driver.findElement(By.xpath("//*[@href='tel:14016']/following-sibling::*"));
         String version = versi.getText();
+
         Capabilities capabilities = driver.getCapabilities();
         String chromeVersion = capabilities.getVersion();
         System.out.println("BIONS WEB Version "+version +" Chrome Version: " + chromeVersion);
@@ -48,18 +49,20 @@ public class Run {
         System.out.println("---------------");
         System.out.println("SEKENARIO BUY");
         ExtentTest stockBuyTest  = extent.createTest("Test Buy Stock", "Description of Test Buy Stock");
-        for (int i = 0; i < 3; i++) {
-            StockBuy.Buy(driver, stockBuyTest, "rg", "random", "high", "1");
-            StockBuy.Buy(driver, stockBuyTest, "rg", "random", "low", "1");
-            StockBuy.Buy(driver, stockBuyTest, "rg", "RANDOM", "open", "1");
-            StockBuy.Buy(driver, stockBuyTest, "rg", "random", "average", "1");
-        }
+        StockBuy.Buy(driver, stockBuyTest, "rg", "random", "high", "1");
+        StockBuy.Buy(driver, stockBuyTest, "rg", "random", "low", "1");
+        StockBuy.Buy(driver, stockBuyTest, "rg", "RANDOM", "open", "1");
+        StockBuy.Buy(driver, stockBuyTest, "rg", "random", "average", "1");
+//
 //        System.out.println("---------------");
 //        ExtentTest stockSellTest  = extent.createTest("Test Sell Stock", "Description of Test Sell Stock");
 //        System.out.println("SEKENARIO SELL");
-//        StockSell.Sell(driver, stockSellTest, "abba", "low", "1");
-//        StockSell.Sell(driver, stockSellTest, "abba", "high", "1");
-//
+//        StockSell.Sell(driver, stockSellTest, "random", "low", "1");
+//        StockSell.Sell(driver, stockSellTest, "random", "high", "1");
+//        StockSell.Sell(driver, stockSellTest, "random", "open", "1");
+//        StockSell.Sell(driver, stockSellTest, "random", "average", "1");
+
+
 //        System.out.println("---------------");
 //        ExtentTest stockWDTest  = extent.createTest("Test Withdrawl Stock", "Description of Test Withdrawl Stock");
 //        System.out.println("SEKENARIO WITHDRAW");
@@ -123,6 +126,7 @@ public class Run {
         time = time.replace(":", "_");
 
         String filename = "D://result//Result Automation "+time+".html";
+
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter(filename);
         extent.attachReporter(sparkReporter);
 

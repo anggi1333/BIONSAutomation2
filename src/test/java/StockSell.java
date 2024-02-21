@@ -12,6 +12,7 @@ public class StockSell {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement menu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
         menu.click();
+
         try {
             // Wait for 1 seconds
             Thread.sleep(1000);
@@ -23,6 +24,15 @@ public class StockSell {
         WebElement sell = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Sell']")));
         Actions actions = new Actions(driver);
         actions.moveToElement(sell).click().perform();
+
+        try {
+            // Wait for 2  seconds
+            Thread.sleep(2000);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
+
 
         WebElement stocksell= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
         stocksell.sendKeys(Keys.CONTROL + "a");
@@ -43,6 +53,64 @@ public class StockSell {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
+        By priceXpath = By.xpath("//*[text()='High']/following-sibling::*");
+        By arrowButtonAXpath = By.xpath("//*[text()='Main Board']/parent::*/following-sibling::*");
+        By arrowButtonBXpath = By.xpath("//*[text()='Watch List Board']/parent::*/following-sibling::*");
+        By arrowButtonCXpath = By.xpath("//*[text()='Development Board']/parent::*/following-sibling::*");
+        By arrowButtonDXpath = By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div/div[1]/div/div/div/div[3]/div/div[2]");
+        WebElement priceElement = null;
+        try {
+            priceElement = driver.findElement(priceXpath);
+        } catch (org.openqa.selenium.NoSuchElementException e) {}
+
+        if (priceElement != null && priceElement.isDisplayed()) {
+
+        } else {
+            WebElement arrowButtonA = null;
+            try {
+                arrowButtonA = driver.findElement(arrowButtonAXpath);
+            } catch (org.openqa.selenium.NoSuchElementException e) {}
+
+            WebElement arrowButtonB = null;
+            try {
+                arrowButtonB = driver.findElement(arrowButtonBXpath);
+            } catch (org.openqa.selenium.NoSuchElementException e) {}
+
+            WebElement arrowButtonC = null;
+            try {
+                arrowButtonC = driver.findElement(arrowButtonCXpath);
+            } catch (org.openqa.selenium.NoSuchElementException e) {}
+            WebElement arrowButtonD = null;
+            try {
+                arrowButtonD = driver.findElement(arrowButtonDXpath);
+            } catch (org.openqa.selenium.NoSuchElementException e) {}
+
+            boolean clicked = false;
+
+            if (arrowButtonA != null && arrowButtonA.isDisplayed()) {
+                try {
+                    actions.moveToElement(arrowButtonA).click().perform();
+                    clicked = true;
+                } catch (Exception e) {}
+            } else if (arrowButtonB != null && arrowButtonB.isDisplayed()) {
+                try {
+                    actions.moveToElement(arrowButtonB).click().perform();
+                    clicked = true;
+                } catch (Exception e) {}
+            } else if (arrowButtonC != null && arrowButtonC.isDisplayed()) {
+                try {
+                    actions.moveToElement(arrowButtonC).click().perform();
+                    clicked = true;
+                } catch (Exception e) {}
+            } else if (arrowButtonD != null && arrowButtonD.isDisplayed()) {
+                try {
+                    actions.moveToElement(arrowButtonD).click().perform();
+                    clicked = true;
+                } catch (Exception e) {}
+            }
+            if (!clicked) {
+            }
+        }
         WebElement pricesell= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div[2]/div/input")));
         pricesell.sendKeys(Keys.CONTROL + "a");
         pricesell.sendKeys(Keys.BACK_SPACE);
@@ -55,7 +123,23 @@ public class StockSell {
         }
         pricesell.sendKeys(Keys.CONTROL + "a");
         pricesell.sendKeys(Keys.BACK_SPACE);
-        pricesell.sendKeys(stockpricesell);
+        WebElement high=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='High']/following-sibling::*")));
+        String hightxt = high.getText();
+        WebElement low = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Low']/following-sibling::*")));
+        String lowtxt = low.getText();
+        if (stockpricesell.equals("high")) {
+            if (hightxt.equals("0")) {
+                pricesell.sendKeys("99999");
+            } else {
+                pricesell.sendKeys(hightxt);
+            }
+        } else if (stockpricesell.equals("low")) {
+            if (lowtxt.equals("0")) {
+                pricesell.sendKeys("99999");
+            } else {
+            pricesell.sendKeys(lowtxt);}
+        }
+        else pricesell.sendKeys(stockpricesell);
 
         WebElement lotsell= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div[2]/div/input")));
         lotsell.clear();
@@ -77,6 +161,8 @@ public class StockSell {
         String text = statusElement.getText();
         WebElement stocklot = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderlot-0']")));
         String stocklottxt = stocklot.getText();
+        WebElement orderprice1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderprice-0']")));
+        String orderpricetxt = orderprice1.getText();
         if (text.contains("REJECTED")) {
             try {
                 // Wait for 2 seconds
@@ -87,8 +173,8 @@ public class StockSell {
             }
             WebElement rejects= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderreject-0']")));
             String rejectstatus = rejects.getText();
-            extentTest.log(Status.FAIL, "Sell : " + stocknamesell + " | Price : " + stockpricesell + " | Lot : " + stocklottxt + " ---------- " + text + " " + rejectstatus);
-            System.out.println("STOCK SELL FAIL "+ stocknamesell + " | Price : " + stockpricesell + " | Lot : " + stocklottxt + " ---------- " + text + " " + rejectstatus);
+            extentTest.log(Status.FAIL, "Sell : " + stocknamesell + " | Price : " + orderpricetxt + " | Lot : " + stocklottxt + " ---------- " + text + " " + rejectstatus);
+            System.out.println("STOCK SELL FAIL "+ stocknamesell + " | Price : " + orderpricetxt + " | Lot : " + stocklottxt + " ---------- " + text + " " + rejectstatus);
         } else {
             try {
                 // Wait for 2 seconds
@@ -97,8 +183,8 @@ public class StockSell {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            extentTest.log(Status.PASS, "Sell : " + stocknamesell + " | Price : " + stockpricesell + " | Lot : " + stocklottxt + " --------- PASS | Status : " + text);
-            System.out.println("STOCK SELL PASS "+ stocknamesell + " | Price : " + stockpricesell + " | Lot : " + stocklottxt + " --------- PASS | Status : " + text);
+            extentTest.log(Status.PASS, "Sell : " + stocknamesell + " | Price : " + orderpricetxt + " | Lot : " + stocklottxt + " --------- PASS | Status : " + text);
+            System.out.println("STOCK SELL PASS "+ stocknamesell + " | Price : " + orderpricetxt + " | Lot : " + stocklottxt + " --------- PASS | Status : " + text);
         }
 
     }

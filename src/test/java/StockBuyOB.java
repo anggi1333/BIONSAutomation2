@@ -13,7 +13,7 @@ import java.util.List;
 public class StockBuyOB {
     public static void BuyOb(WebDriver driver, ExtentTest extentTest, String stocknamebuyob, String stockpricebuyob, String stocklotbuyob) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement menu  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
+        WebElement menu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
         menu.click();
         try {
             // Wait for 1 seconds
@@ -22,7 +22,7 @@ public class StockBuyOB {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Buy']")));
+        WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[4]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div/div/div[21]/div/div/div/div[2]")));
         Actions actions = new Actions(driver);
         actions.moveToElement(buy).click().perform();
         WebElement stockbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
@@ -168,6 +168,25 @@ public class StockBuyOB {
         checkob.click();
         WebElement buybtn= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'BUY') and contains(@style, 'text-align: center')]")));
         buybtn.click();
+        try {
+            // Wait for 1 seconds
+            Thread.sleep(1000);
+        } catch (InterruptedException f) {
+            f.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
+        List<WebElement> infoe = driver.findElements(By.xpath("//*[text()='Information']"));
+        if (!infoe.isEmpty()) {
+            WebElement failElements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Information'][1]/following-sibling::*[1]")));
+            String txtfail = failElements.getText();
+            extentTest.log(Status.FAIL, "FAIL " + txtfail);
+            System.out.println("FAIL " +txtfail);
+            WebElement okElements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Information'][1]/following-sibling::*[2]/div")));
+            okElements.click();
+            return;
+        }
+
+
         WebElement sendthisorderyes= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
         sendthisorderyes.click();
         WebElement ordersendyes= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));

@@ -40,7 +40,7 @@ public class Login {
             custom1.click();
             WebElement custom1txt = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div[2]/div/div[1]/div/div/div/div/div[3]/div[3]/div[2]/div/input")));
             custom1txt.clear();
-            custom1txt.sendKeys("appdeev.bions.id");
+            custom1txt.sendKeys("mock.bions.id");
 //            WebElement devweb = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[3]/div[2]/div/div/div/div/div[2]/div/div")));
 //            devweb.click();
             WebElement munitiyserver = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div[2]/div/div[1]/div/div/div/div/div[4]/div[2]/div")));
@@ -49,7 +49,7 @@ public class Login {
             custom2.click();
             WebElement custom2txt = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div[2]/div/div[1]/div/div/div/div/div[4]/div[3]/div[2]/div/input")));
             custom2txt.clear();
-            custom2txt.sendKeys("appdeev.bions.id");
+            custom2txt.sendKeys("mock.bions.id");
 //            WebElement apiserverurl = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div[2]/div/div[1]/div/div/div/div/div[5]/div[2]/div[2]/div/input")));
 //            apiserverurl.clear();
 //            apiserverurl.sendKeys("apidev.bions.id");
@@ -79,9 +79,11 @@ public class Login {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            List<WebElement> tutorpuh = driver.findElements(By.xpath("//*[text()='Hide Tutorial']"));
+            List<WebElement> tutorpuh = driver.findElements(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div/div/div/div"));
+
+//            List<WebElement> tutorpuh = driver.findElements(By.xpath("//*[text()='Hide Tutorial']"));
             if (!tutorpuh.isEmpty()) {
-                tutorpuh.get(0).click();
+               // tutorpuh.get(0).click();
                 WebElement g3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div/div/div[2]/div/div/div/div/div[3]")));
                 g3.click();
                 WebElement setting2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Setting']")));
@@ -121,7 +123,7 @@ public class Login {
             custom.click();
             WebElement txtcustom = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div[2]/div/div[1]/div/div/div/div/div[3]/div[3]/div[2]/div/input")));
             txtcustom.clear();
-            txtcustom.sendKeys("www101.bions.id");
+            txtcustom.sendKeys("mock.bions.id");
             txtcustom.sendKeys(Keys.ENTER);
             WebElement save = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div[2]/div[2]/div[2]/div/div/div/div/div/div[2]/div/div[2]/div/div[1]/div")));
             save.click();

@@ -10,25 +10,25 @@ import java.util.Collections;
 import java.util.List;
 
 public class StockBuy {
-    public static void Buy(WebDriver driver, ExtentTest extentTest, String TNorRG, String stocknamebuy, String  stockpricebuy, String stocklotbuy) {
+    public static void Buy(WebDriver driver, ExtentTest extentTest, String TNorRG, String stocknamebuy, String stockpricebuy, String stocklotbuy) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement portp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[2]")));
         portp.click();
         try {
             // Wait for 1 seconds
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
         WebElement asset = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[2]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div[1]/div[1]/div[3]/div/div[3]/div[2]")));
         String asset1 = asset.getText();
-        WebElement menu= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
+        WebElement menu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
         menu.click();
         menu.click();
         try {
             // Wait for 1 seconds
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
@@ -48,7 +48,7 @@ public class StockBuy {
         String finalOutput = selectedLetters.substring(0, Math.min(selectedLetters.length(), 4));
 
 
-        WebElement stockbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
+        WebElement stockbuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
         stockbuy.sendKeys(Keys.CONTROL + "a");
 
         try {
@@ -61,7 +61,7 @@ public class StockBuy {
         stockbuy.sendKeys(Keys.BACK_SPACE);
         if (stocknamebuy.toLowerCase().contains("random")) {
             stockbuy.sendKeys(finalOutput);
-        }else {
+        } else {
             stockbuy.sendKeys(stocknamebuy);
         }
         stockbuy.sendKeys(Keys.ENTER);
@@ -72,24 +72,21 @@ public class StockBuy {
             String txterror = error.getText();
             WebElement failElements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Error'][1]/following-sibling::*[1]")));
             String txtfail = failElements.getText();
-            extentTest.log(Status.FAIL,"FAIL STOCK "+stocknamebuy+" or "+finalOutput+ "-----------"+txterror+" "+txtfail);
-            System.out.println("FAIL STOCK "+stocknamebuy+" or "+finalOutput+ "-----------"+txterror+" "+txtfail);
+            extentTest.log(Status.FAIL, "FAIL STOCK " + stocknamebuy + " or " + finalOutput + "-----------" + txterror + " " + txtfail);
+            System.out.println("FAIL STOCK " + stocknamebuy + " or " + finalOutput + "-----------" + txterror + " " + txtfail);
             WebElement okElements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Error'][1]/following-sibling::*[2]/div")));
             okElements.click();
             return;
         }
 
 
-
         try {
             // Wait for 2  seconds
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement value = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Value']/following-sibling::*")));
-        String valuetxt = value.getText();
         By priceXpath = By.xpath("//*[text()='High']/following-sibling::*");
         By arrowButtonAXpath = By.xpath("//*[text()='Main Board']/parent::*/following-sibling::*");
         By arrowButtonBXpath = By.xpath("//*[text()='Watch List Board']/parent::*/following-sibling::*");
@@ -98,7 +95,8 @@ public class StockBuy {
         WebElement priceElement = null;
         try {
             priceElement = driver.findElement(priceXpath);
-        } catch (org.openqa.selenium.NoSuchElementException e) {}
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
 
         if (priceElement != null && priceElement.isDisplayed()) {
 
@@ -106,21 +104,25 @@ public class StockBuy {
             WebElement arrowButtonA = null;
             try {
                 arrowButtonA = driver.findElement(arrowButtonAXpath);
-            } catch (org.openqa.selenium.NoSuchElementException e) {}
+            } catch (org.openqa.selenium.NoSuchElementException e) {
+            }
 
             WebElement arrowButtonB = null;
             try {
                 arrowButtonB = driver.findElement(arrowButtonBXpath);
-            } catch (org.openqa.selenium.NoSuchElementException e) {}
+            } catch (org.openqa.selenium.NoSuchElementException e) {
+            }
 
             WebElement arrowButtonC = null;
             try {
                 arrowButtonC = driver.findElement(arrowButtonCXpath);
-            } catch (org.openqa.selenium.NoSuchElementException e) {}
+            } catch (org.openqa.selenium.NoSuchElementException e) {
+            }
             WebElement arrowButtonD = null;
             try {
                 arrowButtonD = driver.findElement(arrowButtonDXpath);
-            } catch (org.openqa.selenium.NoSuchElementException e) {}
+            } catch (org.openqa.selenium.NoSuchElementException e) {
+            }
 
             boolean clicked = false;
 
@@ -128,46 +130,50 @@ public class StockBuy {
                 try {
                     actions.moveToElement(arrowButtonA).click().perform();
                     clicked = true;
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             } else if (arrowButtonB != null && arrowButtonB.isDisplayed()) {
                 try {
                     actions.moveToElement(arrowButtonB).click().perform();
                     clicked = true;
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             } else if (arrowButtonC != null && arrowButtonC.isDisplayed()) {
                 try {
                     actions.moveToElement(arrowButtonC).click().perform();
                     clicked = true;
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             } else if (arrowButtonD != null && arrowButtonD.isDisplayed()) {
                 try {
                     actions.moveToElement(arrowButtonD).click().perform();
                     clicked = true;
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             }
             if (!clicked) {
             }
         }
-              if (TNorRG.equals("TN")) {
-                  WebElement settn= wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/div[2]")));
-                  JavascriptExecutor executor = (JavascriptExecutor) driver;
-                  executor.executeScript("arguments[0].click();", settn);
-                WebElement tn= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='TN']")));
-                  JavascriptExecutor executor2 = (JavascriptExecutor) driver;
-                  executor2.executeScript("arguments[0].click();", tn);
+        if (TNorRG.equals("TN")) {
+            WebElement settn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/div[2]")));
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript("arguments[0].click();", settn);
+            WebElement tn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='TN']")));
+            JavascriptExecutor executor2 = (JavascriptExecutor) driver;
+            executor2.executeScript("arguments[0].click();", tn);
 
         }
-        WebElement open=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Open']/following-sibling::*")));
+        WebElement open = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Open']/following-sibling::*")));
         String opentxt = open.getText();
-        WebElement average =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Average']/following-sibling::*")));
+        WebElement average = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Average']/following-sibling::*")));
         String averagetxt = average.getText();
-        WebElement high=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='High']/following-sibling::*")));
+        WebElement high = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='High']/following-sibling::*")));
         String hightxt = high.getText();
-        WebElement llow=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='L.Low']/following-sibling::*")));
+        WebElement llow = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='L.Low']/following-sibling::*")));
         String llowtxt = llow.getText();
         WebElement low = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Low']/following-sibling::*")));
         String lowtxt = low.getText();
-        WebElement pricebuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div[2]/div/input")));
+        WebElement pricebuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div[2]/div/input")));
         pricebuy.sendKeys(Keys.CONTROL + "a");
         pricebuy.sendKeys(Keys.BACK_SPACE);
         try {
@@ -209,7 +215,7 @@ public class StockBuy {
             default -> pricebuy.sendKeys(stockpricebuy);
         }
 
-        WebElement lotbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div[2]/div/input")));
+        WebElement lotbuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div[2]/div/input")));
         lotbuy.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds
@@ -228,8 +234,9 @@ public class StockBuy {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-
-        WebElement buybtn= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'BUY') and contains(@style, 'text-align: center')]")));
+        WebElement value = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Value']/following-sibling::*")));
+        String valuetxt = value.getText();
+        WebElement buybtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'BUY') and contains(@style, 'text-align: center')]")));
         buybtn.click();
         List<WebElement> errorElements2 = driver.findElements(By.xpath("//*[text()='Error']"));
         if (!errorElements2.isEmpty()) {
@@ -237,46 +244,27 @@ public class StockBuy {
             String txterror = error.getText();
             WebElement failElements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Error'][1]/following-sibling::*[1]")));
             String txtfail = failElements.getText();
-            extentTest.log(Status.FAIL,txterror+" "+txtfail);
-            System.out.println("FAIL "+stocknamebuy+ "-----------"+txterror+" "+txtfail);
+            extentTest.log(Status.FAIL, txterror + " " + txtfail);
+            System.out.println("FAIL " + stocknamebuy + "-----------" + txterror + " " + txtfail);
             WebElement okElements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Error'][1]/following-sibling::*[2]/div")));
             okElements.click();
             return;
         }
 
-        WebElement sendthisorderyes= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
+        WebElement sendthisorderyes = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
         sendthisorderyes.click();
-        WebElement ordersendyes= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
+        WebElement ordersendyes = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
         ordersendyes.click();
         try {
             // Wait for 1 seconds
-            Thread.sleep(3000);
-        } catch (InterruptedException f) {
-            f.printStackTrace();
-            Thread.currentThread().interrupt();
-        }
-        portp.click();
-        try {
-            // Wait for 2 seconds
-            Thread.sleep(2000);
-        } catch (InterruptedException f) {
-            f.printStackTrace();
-            Thread.currentThread().interrupt();
-        }
-
-        String asset2 = asset.getText();
-        WebElement order = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[3]")));
-        order.click();
-        try {
-            // Wait for 1 seconds
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException f) {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
         WebElement stocknameresult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[1]/div/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div/div[1]/div[1]")));
         String stocknameresulttxt = stocknameresult.getText();
-        WebElement statusElement=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderstatus-0']")));
+        WebElement statusElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderstatus-0']")));
         String text = statusElement.getText();
         WebElement stocklot = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderlot-0']")));
         String stocklottxt = stocklot.getText();
@@ -284,33 +272,42 @@ public class StockBuy {
         String orderpricetxt = orderprice1.getText();
         if (text.contains("REJECTED")) {
 
-            WebElement rejects=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderreject-0']")));
+            WebElement rejects = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='orderreject-0']")));
             String rejectstatus = rejects.getText();
             try {
                 // Wait for 2 seconds
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (InterruptedException f) {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
 
-            extentTest.log(Status.FAIL, "Buy :" + stocknameresulttxt  +" | Price : "+stockpricebuy + " "+orderpricetxt + " | Lot : " + stocklottxt +"|  Value :"+valuetxt + " ---------- " + text + " " + rejectstatus+"------ LIMIT Before :"+asset1+" LIMIT After :"+asset2);
+            extentTest.log(Status.FAIL, "Buy :" + stocknameresulttxt + " | Price : " + stockpricebuy + " " + orderpricetxt + " | Lot : " + stocklottxt + "|  Value :" + valuetxt + " ---------- " + text + " " + rejectstatus);
 
-            System.out.println("STOCK BUY FAIL "+ stocknameresulttxt +" | Price : "+stockpricebuy+" "+orderpricetxt + " | Lot : " + stocklottxt+" | Value :"+valuetxt  + " ---------- " + text + " " + rejectstatus+"------ LIMIT Before :"+asset1+" LIMIT After :"+asset2);
-
+            System.out.println("STOCK BUY FAIL " + stocknameresulttxt + " | Price : " + stockpricebuy + " " + orderpricetxt + " | Lot : " + stocklottxt + " | Value :" + valuetxt + " ---------- " + text + " " + rejectstatus);
         } else {
+            portp.click();
             try {
                 // Wait for 2 seconds
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (InterruptedException f) {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-               extentTest.log(Status.PASS, "Buy : " + stocknameresulttxt +" | Price : "+stockpricebuy + " "+orderpricetxt + " | Lot : " + stocklottxt +" | Value :"+valuetxt+" --------- PASS | Status : " + text +"------ LIMIT Before :"+asset1+"LIMIT Before :"+asset2);
-                System.out.println("STOCK BUY PASS "+ stocknameresulttxt + " | Price : "+stockpricebuy +" "+ orderpricetxt + " | Lot : " + stocklottxt+" | Value :"+valuetxt + " --------- PASS | Status : " + text+"------ LIMIT Before :"+asset1+" LIMIT After :"+asset2);
-               System.out.println("STOCK BUY PASS "+ stocknameresulttxt + " | Price : "+stockpricebuy + orderpricetxt + " | Lot : " + stocklottxt+" | Value :"+valuetxt  + " --------- PASS | Status : " + text+"------ LIMIT Before :"+asset1+" LIMIT After :"+asset2);
+            String asset2 = asset.getText();
+            try {
+                // Wait for 2 seconds
+                Thread.sleep(1000);
+            } catch (InterruptedException f) {
+                f.printStackTrace();
+                Thread.currentThread().interrupt();
             }
-
+            extentTest.log(Status.PASS, "Buy : " + stocknameresulttxt + " | Price : " + stockpricebuy + " " + orderpricetxt + " | Lot : " + stocklottxt + " | Value :" + valuetxt + " --------- PASS | Status : " + text + "------ LIMIT Before :" + asset1 + "LIMIT Before :" + asset2);
+            //   System.out.println("STOCK BUY PASS "+ stocknameresulttxt + " | Price : "+stockpricebuy +" "+ orderpricetxt + " | Lot : " + stocklottxt+" | Value :"+valuetxt + " --------- PASS | Status : " + text+"------ LIMIT Before :"+asset1+" LIMIT After :"+asset2);
+            System.out.println("STOCK BUY PASS " + stocknameresulttxt + " | Price : " + stockpricebuy + orderpricetxt + " | Lot : " + stocklottxt + " | Value :" + valuetxt + " --------- PASS | Status : " + text + "------ LIMIT Before :" + asset1 + " LIMIT After :" + asset2);
         }
+
     }
+}
+
 

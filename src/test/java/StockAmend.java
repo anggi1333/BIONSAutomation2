@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class StockAmend {
     public static void am(WebDriver driver, ExtentTest extentTest, String stocknameam, String stockpriceam, String stocklotam, String stockpriceamto, String stocklotamto) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -203,8 +205,22 @@ public class StockAmend {
             }
             WebElement btnam = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='AMEND']")));
             btnam.click();
+            List<WebElement> errorElements = driver.findElements(By.xpath("//*[text()='Error']"));
+            if (!errorElements.isEmpty()) {
+                WebElement error = errorElements.get(0);
+                String txterror = error.getText();
+                WebElement failElements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Error'][1]/following-sibling::*[1]")));
+                String txtfail = failElements.getText();
+                extentTest.log(Status.FAIL, "FAIL STOCK " + txterror+ " "+txtfail);
+                System.out.println("FAIL STOCK " + txterror+" " +txtfail);
+                WebElement okElements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Error'][1]/following-sibling::*[2]/div")));
+                okElements.click();
+                return;
+            }
             WebElement sendthisorderyesam = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
             sendthisorderyesam.click();
+
+
             WebElement ordersendyesam = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@style, 'font-weight: normal;') and text()='OK']")));
             ordersendyesam.click();
             try {

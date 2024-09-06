@@ -1,9 +1,6 @@
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,8 +10,8 @@ import java.util.List;
 public class StockAmend {
     public static void am(WebDriver driver, ExtentTest extentTest, String stocknameam, String stockpriceam, String stocklotam, String stockpriceamto, String stocklotamto) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement menu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
-        menu.click();
+        WebElement menu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='main.menu.label']/parent::*/parent::*/parent::*")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", menu);
         try {
             // Wait for 1 seconds
             Thread.sleep(1000);
@@ -22,10 +19,12 @@ public class StockAmend {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Buy']")));
+        WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Dashboard')]/ancestor::*[4]/following-sibling::*[1]")));
         Actions actions = new Actions(driver);
         actions.moveToElement(buy).click().perform();
-        WebElement stockbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
+        WebElement stockbuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/input")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", stockbuy);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", stockbuy);
         stockbuy.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds
@@ -48,7 +47,7 @@ public class StockAmend {
         By arrowButtonAXpath = By.xpath("//*[text()='Main Board']/parent::*/following-sibling::*");
         By arrowButtonBXpath = By.xpath("//*[text()='Watch List Board']/parent::*/following-sibling::*");
         By arrowButtonCXpath = By.xpath("//*[text()='Development Board']/parent::*/following-sibling::*");
-        By arrowButtonDXpath = By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div/div[1]/div/div/div/div[3]/div/div[2]");
+        By arrowButtonDXpath = By.xpath("//*[text()='New Economy Board']/parent::*/following-sibling::*");
         WebElement priceElement = null;
         try {
             priceElement = driver.findElement(priceXpath);
@@ -106,7 +105,7 @@ public class StockAmend {
         String hightxt = high.getText();
         WebElement low = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Low']/following-sibling::*")));
         String lowtxt = low.getText();
-        WebElement pricebuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div[2]/div/input")));
+        WebElement pricebuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div[2]/input")));
         pricebuy.sendKeys(Keys.CONTROL + "a");
         pricebuy.sendKeys(Keys.BACK_SPACE);
         try {
@@ -129,7 +128,7 @@ public class StockAmend {
             } else {
             pricebuy.sendKeys(lowtxt);}
         } else pricebuy.sendKeys(stockpriceam);
-        WebElement lotbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div[2]/div/input")));
+        WebElement lotbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div[2]/input")));
         lotbuy.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds
@@ -163,7 +162,7 @@ public class StockAmend {
 
             WebElement amend1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Amend']")));
             amend1.click();
-          WebElement pricebuyam = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div[2]/div/input")));
+          WebElement pricebuyam = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div[2]/input")));
             pricebuyam.sendKeys(Keys.CONTROL + "a");
             pricebuyam.sendKeys(Keys.BACK_SPACE);
             try {
@@ -185,7 +184,7 @@ public class StockAmend {
                 f.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-            WebElement lotbuyam = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div[2]/div/input")));
+            WebElement lotbuyam = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div[2]/input")));
             lotbuyam.sendKeys(Keys.CONTROL + "a");
             try {
                 // Wait for 0.5 seconds

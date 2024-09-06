@@ -1,9 +1,6 @@
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,8 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class StockWithdrawl {
     public static void wd(WebDriver driver, ExtentTest extentTest, String stocknamewd, String stockpricewd, String stocklotwd) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement menu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div[2]/div/div/div[4]")));
-        menu.click();
+        WebElement menu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='main.menu.label']/parent::*/parent::*/parent::*")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", menu);
         try {
             // Wait for 1 seconds
             Thread.sleep(1000);
@@ -20,7 +17,7 @@ public class StockWithdrawl {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Buy']")));
+        WebElement buy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Dashboard')]/ancestor::*[4]/following-sibling::*[1]")));
         Actions actions = new Actions(driver);
         actions.moveToElement(buy).click().perform();
         try {
@@ -54,7 +51,7 @@ public class StockWithdrawl {
         By arrowButtonAXpath = By.xpath("//*[text()='Main Board']/parent::*/following-sibling::*");
         By arrowButtonBXpath = By.xpath("//*[text()='Watch List Board']/parent::*/following-sibling::*");
         By arrowButtonCXpath = By.xpath("//*[text()='Development Board']/parent::*/following-sibling::*");
-        By arrowButtonDXpath = By.xpath("/html/body/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div[2]/div/div/div[1]/div/div/div/div[3]/div/div[2]");
+        By arrowButtonDXpath = By.xpath("//*[text()='New Economy Board']/parent::*/following-sibling::*");
         WebElement priceElement = null;
         try {
             priceElement = driver.findElement(priceXpath);
@@ -79,9 +76,8 @@ public class StockWithdrawl {
             } catch (org.openqa.selenium.NoSuchElementException e) {}
             WebElement arrowButtonD = null;
             try {
-                arrowButtonD = driver.findElement(arrowButtonDXpath);
+                arrowButtonC = driver.findElement(arrowButtonDXpath);
             } catch (org.openqa.selenium.NoSuchElementException e) {}
-
             boolean clicked = false;
 
             if (arrowButtonA != null && arrowButtonA.isDisplayed()) {
@@ -101,14 +97,14 @@ public class StockWithdrawl {
                 } catch (Exception e) {}
             } else if (arrowButtonD != null && arrowButtonD.isDisplayed()) {
                 try {
-                    actions.moveToElement(arrowButtonD).click().perform();
+                    actions.moveToElement(arrowButtonC).click().perform();
                     clicked = true;
                 } catch (Exception e) {}
             }
             if (!clicked) {
             }
         }
-        WebElement pricebuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div[2]/div/input")));
+        WebElement pricebuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div/div/input")));
         pricebuy.sendKeys(Keys.CONTROL + "a");
         pricebuy.sendKeys(Keys.BACK_SPACE);
         WebElement high=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='High']/following-sibling::*")));
@@ -129,7 +125,7 @@ public class StockWithdrawl {
         }
         else pricebuy.sendKeys(stockpricewd);
 
-        WebElement lotbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div[2]/div/input")));
+        WebElement lotbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div/div/input")));
         lotbuy.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds

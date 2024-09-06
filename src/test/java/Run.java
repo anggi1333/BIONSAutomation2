@@ -7,6 +7,8 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
@@ -40,39 +42,56 @@ public class Run {
 
             Capabilities capabilities = driver.getCapabilities();
             String chromeVersion = capabilities.getVersion();
-            System.out.println("BIONS WEB Version "+  " Chrome Version: " + chromeVersion);
+            WebElement vers = driver.findElement(By.xpath("//*[text()='14016']/parent::*/following-sibling::*"));
+            String versibions = vers.getText();
+            System.out.println("BIONS WEB "+ versibions + " Chrome Version: " + chromeVersion);
+
+
 
             ExtentTest loginTest = extent.createTest("Test Login", "Description of Test Scenario Login");
-            Login.testScenariologin(driver, loginTest, "DEV", "23AA02208", "tes123", "tes123");
+            Login.testScenariologin(driver, loginTest, "DEV", "raybca01", "q", "p12345");
 
-            System.out.println("---------------");
-            System.out.println("SEKENARIO BUY");
-            ExtentTest stockBuyTest = extent.createTest("Test Buy Stock", "Description of Test Buy Stock");
-            StockBuy.Buy(driver, stockBuyTest, "rg", "random", "low", "222222222");
-            StockBuy.Buy(driver, stockBuyTest, "rg", "random", "low", "100");
-            StockBuy.Buy(driver, stockBuyTest, "rg", "random", "low", "100");
+//            System.out.println("---------------");
+//            System.out.println("SEKENARIO BUY");
+//            ExtentTest stockBuyTest = extent.createTest("Test Buy Stock", "Description of Test Buy Stock");
+//            StockBuy.Buy(driver, stockBuyTest, "rg", "bbca", "open", "100");
+//            StockBuy.Buy(driver, stockBuyTest, "rg", "bbca", "open", "100");
+//            StockBuy.Buy(driver, stockBuyTest, "rg", "bbni", "open", "100");
+//            StockBuy.Buy(driver, stockBuyTest, "rg", "bbri", "open", "100");
 
 
             System.out.println("---------------");
             ExtentTest stockSellTest = extent.createTest("Test Sell Stock", "Description of Test Sell Stock");
             System.out.println("SEKENARIO SELL");
-            StockSell.Sell(driver, stockSellTest, "random", "low", "1");
-            StockSell.Sell(driver, stockSellTest, "random", "high", "1");
-            StockSell.Sell(driver, stockSellTest, "random", "open", "1");
-            StockSell.Sell(driver, stockSellTest, "random", "average", "1");
-
+            StockSell.Sell(driver, stockSellTest, "bbca", "high", "100");
+            StockSell.Sell(driver, stockSellTest, "bbca", "high", "100");
+            StockSell.Sell(driver, stockSellTest, "bbni", "high", "100");
+            StockSell.Sell(driver, stockSellTest, "bbri", "high", "100");
 
             System.out.println("---------------");
             ExtentTest stockWDTest = extent.createTest("Test Withdrawl Stock", "Description of Test Withdrawl Stock");
             System.out.println("SEKENARIO WITHDRAW");
+            StockWithdrawl.wd(driver, stockWDTest, "buka", "low", "1");
             StockWithdrawl.wd(driver, stockWDTest, "abba", "low", "1");
-            StockWithdrawl.wd(driver, stockWDTest, "abba", "high", "1");
+            StockWithdrawl.wd(driver, stockWDTest, "abba", "low", "1");
+            StockWithdrawl.wd(driver, stockWDTest, "bbca", "low", "1");
 
             System.out.println("---------------");
             ExtentTest stockAmend = extent.createTest("Test Amend", "Desription of Test Amend Stock");
             System.out.println("SEKENARIO AMEND");
-            StockAmend.am(driver, stockAmend, "abba", "low", "2", "high", "1");
-            StockAmend.am(driver, stockAmend, "abba", "high", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "bbca", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "bbri", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "bbca", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "buka", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "abba", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "bbca", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "bbca", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "bbri", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "bbca", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "buka", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "abba", "low", "2", "low", "1");
+            StockAmend.am(driver, stockAmend, "bbca", "low", "2", "low", "1");
+
 
             System.out.println("---------------");
             ExtentTest stockBuyObTest = extent.createTest("Test Buy Stock OrderBooking", "Description of Test Buy Stock OrderBooking");
@@ -88,8 +107,6 @@ public class Run {
 
 
             System.out.println("--------------ALGO--------------");
-
-
             System.out.println("---------------");
             ExtentTest BookingByPriceTest = extent.createTest("Test Booking By PriceTest", "Desription Auto Booking By Price");
             System.out.println("SEKENARIO AUTO BOOKING BY PRICE");

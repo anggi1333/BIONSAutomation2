@@ -10,7 +10,7 @@
     import java.util.List;
 
     public class StockBuy {
-        public static void Buy(WebDriver driver, ExtentTest extentTest, String TNorRG, String stocknamebuy, String stockpricebuy, String stocklotbuy) {
+        public static void Buy(WebDriver driver, ExtentTest extentTest, String stocknamebuy, String stockpricebuy, String stocklotbuy) {
             WebDriverWait wait = new WebDriverWait(driver, 10);
 
 
@@ -151,15 +151,6 @@
                 }
                 if (!clicked) {
                 }
-            }
-            if (TNorRG.equals("TN")) {
-                WebElement settn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/div[2]")));
-                JavascriptExecutor executor = (JavascriptExecutor) driver;
-                executor.executeScript("arguments[0].click();", settn);
-                WebElement tn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='TN']")));
-                JavascriptExecutor executor2 = (JavascriptExecutor) driver;
-                executor2.executeScript("arguments[0].click();", tn);
-
             }
             WebElement open = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Open']/following-sibling::*")));
             String opentxt = open.getText();

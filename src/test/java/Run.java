@@ -39,15 +39,11 @@ public class Run {
             f.printStackTrace();
         }
             Thread.currentThread().interrupt();
-            //anggi cantiq
-
             Capabilities capabilities = driver.getCapabilities();
             String chromeVersion = capabilities.getVersion();
             WebElement vers = driver.findElement(By.xpath("//*[text()='14016']/parent::*/following-sibling::*"));
             String versibions = vers.getText();
             System.out.println("BIONS WEB "+ versibions + " Chrome Version: " + chromeVersion);
-
-
 
             ExtentTest loginTest = extent.createTest("Test Login", "Description of Test Scenario Login");
             Login.testScenariologin(driver, loginTest, "DEV", "raybca01", "q", "p12345");
@@ -55,8 +51,8 @@ public class Run {
             System.out.println("---------------");
             System.out.println("SEKENARIO BUY");
             ExtentTest stockBuyTest = extent.createTest("Test Buy Stock", "Description of Test Buy Stock");
-            StockBuy.Buy(driver, stockBuyTest, "rg", "bbni", "low", "1");
-            StockBuy.Buy(driver, stockBuyTest, "rg", "bbni", "low", "2");
+            StockBuy.Buy(driver, stockBuyTest,  "bbni", "low", "1");
+            StockBuy.Buy(driver, stockBuyTest, "bbni", "low", "2");
 
             System.out.println("---------------");
             ExtentTest stockSellTest = extent.createTest("Test Sell Stock", "Description of Test Sell Stock");

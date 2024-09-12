@@ -39,7 +39,7 @@ public class Run {
             f.printStackTrace();
         }
             Thread.currentThread().interrupt();
-
+            //anggi cantiq
 
             Capabilities capabilities = driver.getCapabilities();
             String chromeVersion = capabilities.getVersion();

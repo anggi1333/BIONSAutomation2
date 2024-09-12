@@ -43,7 +43,7 @@ public class StockSell {
             f.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        WebElement stocksell= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
+        WebElement stocksell= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div[2]//input")));
         stocksell.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds
@@ -135,7 +135,7 @@ public class StockSell {
             if (!clicked) {
             }
         }
-        WebElement pricesell= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div/div/input")));
+        WebElement pricesell= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div/input")));
         pricesell.sendKeys(Keys.CONTROL + "a");
         pricesell.sendKeys(Keys.BACK_SPACE);
         try {
@@ -190,7 +190,7 @@ public class StockSell {
         }
 
 
-        WebElement lotsell= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div/div/input")));
+        WebElement lotsell= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div/input")));
         lotsell.clear();
         lotsell.sendKeys(stocklotsell);
         WebElement sellbtn= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'SELL') and contains(@style, 'text-align: center')]")));

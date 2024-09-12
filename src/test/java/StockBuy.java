@@ -54,7 +54,7 @@
                 Thread.currentThread().interrupt();
             }
 
-            WebElement stockbuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
+            WebElement stockbuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div[2]//input")));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", stockbuy);
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", stockbuy);
             stockbuy.sendKeys(Keys.CONTROL + "a");
@@ -171,7 +171,7 @@
             String llowtxt = llow.getText();
             WebElement low = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Low']/following-sibling::*")));
             String lowtxt = low.getText();
-            WebElement pricebuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div/div/input")));
+            WebElement pricebuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div/input")));
             pricebuy.sendKeys(Keys.CONTROL + "a");
             pricebuy.sendKeys(Keys.BACK_SPACE);
             try {
@@ -213,7 +213,7 @@
                 default -> pricebuy.sendKeys(stockpricebuy);
             }
 
-            WebElement lotbuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div/div/input")));
+            WebElement lotbuy = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div/input")));
             lotbuy.sendKeys(Keys.CONTROL + "a");
             try {
                 // Wait for 0.5 seconds

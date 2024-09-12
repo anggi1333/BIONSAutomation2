@@ -143,7 +143,7 @@ public class Login {
 
             if (istutorDisplayed||
                     ismenuNotDisplayed) {
-                WebElement g3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@data-testid='text-input-outlined']/parent::*/parent::*/parent::*/parent::*/parent::*/parent::*/div/following-sibling::*/following-sibling::*[@role='button']")));
+                WebElement g3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@data-testid='text-input-outlined']/parent::*/parent::*/parent::*/parent::*/parent::*/div[3]")));
                 g3.click();
                 WebElement setting2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Setting']")));
                 setting2.click();
@@ -156,7 +156,7 @@ public class Login {
             }
                 WebElement fixed = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Fixed']")));
                 fixed.click();
-                WebElement quicktour = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Quick Tour']/parent::*/parent::*/following-sibling::*//input[@type='checkbox']")));
+                WebElement quicktour = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Quick Tour']/parent::*/parent::*//input[@type='checkbox']")));
                 if (quicktour.isSelected()) {
                     quicktour.click();
                 }

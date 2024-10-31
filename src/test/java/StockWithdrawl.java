@@ -5,9 +5,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class StockWithdrawl {
     public static void wd(WebDriver driver, ExtentTest extentTest, String stocknamewd, String stockpricewd, String stocklotwd) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement menu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='main.menu.label']/parent::*/parent::*/parent::*")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", menu);
         try {
@@ -28,7 +30,7 @@ public class StockWithdrawl {
             Thread.currentThread().interrupt();
         }
 
-        WebElement stockbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div/div/input")));
+        WebElement stockbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Stock']/following-sibling::*/div/div/div[2]//input")));
         stockbuy.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds
@@ -104,7 +106,7 @@ public class StockWithdrawl {
             if (!clicked) {
             }
         }
-        WebElement pricebuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div/div/input")));
+        WebElement pricebuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Price']/following-sibling::*/div/input")));
         pricebuy.sendKeys(Keys.CONTROL + "a");
         pricebuy.sendKeys(Keys.BACK_SPACE);
         WebElement high=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='High']/following-sibling::*")));
@@ -125,7 +127,7 @@ public class StockWithdrawl {
         }
         else pricebuy.sendKeys(stockpricewd);
 
-        WebElement lotbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div/div/input")));
+        WebElement lotbuy= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Lot']/following-sibling::*/div/input")));
         lotbuy.sendKeys(Keys.CONTROL + "a");
         try {
             // Wait for 0.5 seconds

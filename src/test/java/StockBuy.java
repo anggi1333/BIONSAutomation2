@@ -5,13 +5,14 @@
     import org.openqa.selenium.support.ui.ExpectedConditions;
     import org.openqa.selenium.support.ui.WebDriverWait;
 
+    import java.time.Duration;
     import java.util.Arrays;
     import java.util.Collections;
     import java.util.List;
 
     public class StockBuy {
         public static void Buy(WebDriver driver, ExtentTest extentTest, String stocknamebuy, String stockpricebuy, String stocklotbuy) {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 
             WebElement portp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-testid='main.portfolio.label']/parent::*/parent::*/parent::*")));
